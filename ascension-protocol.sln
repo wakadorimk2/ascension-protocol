@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35303.130
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ascension-protocol", "ascension-protocol\ascension-protocol.csproj", "{F506A3C8-8D83-4E19-9A7A-B3D7B22BA815}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ascension-protocol", "ascension-protocol\ascension-protocol.csproj", "{D4D2CE52-F012-4F39-A59D-AFDABC0CFCF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F506A3C8-8D83-4E19-9A7A-B3D7B22BA815}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F506A3C8-8D83-4E19-9A7A-B3D7B22BA815}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F506A3C8-8D83-4E19-9A7A-B3D7B22BA815}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F506A3C8-8D83-4E19-9A7A-B3D7B22BA815}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4D2CE52-F012-4F39-A59D-AFDABC0CFCF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4D2CE52-F012-4F39-A59D-AFDABC0CFCF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4D2CE52-F012-4F39-A59D-AFDABC0CFCF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4D2CE52-F012-4F39-A59D-AFDABC0CFCF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {30562849-9030-41E0-AA13-F2F03B766434}
+		SolutionGuid = {8B2A7B81-607F-4B91-8243-D4A0779DD2C3}
 	EndGlobalSection
 EndGlobal

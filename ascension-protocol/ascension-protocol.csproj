@@ -3,8 +3,6 @@
   <PropertyGroup>
     <TargetFramework>net481</TargetFramework>
     <RootNamespace>ascension_protocol</RootNamespace>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
