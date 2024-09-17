@@ -88,8 +88,6 @@ artifacts/
 # Unity specific
 *.pidb
 *.booproj
-*.sln
-*.csproj
 *.unityproj
 *.tmproj
 *.svd
@@ -97,8 +95,6 @@ artifacts/
 # Unity3D generated meta files
 *.pidb.meta
 *.booproj.meta
-*.sln.meta
-*.csproj.meta
 *.unityproj.meta
 *.tmproj.meta
 *.svd.meta
