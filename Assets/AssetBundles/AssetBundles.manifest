@@ -1,7 +1,7 @@
 ManifestFileVersion: 0
-CRC: 1770090956
+CRC: 3609254157
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: player_character_bundle.pink_twin
+      Name: pink_twin.unity3d
       Dependencies: {}

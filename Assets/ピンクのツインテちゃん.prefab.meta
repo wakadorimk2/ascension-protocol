@@ -1,7 +1,9 @@
 fileFormatVersion: 2
 guid: fb54ee06dc31ca744887ac6e62e4b5c5
+labels:
+- Character
 PrefabImporter:
   externalObjects: {}
   userData: 
-  assetBundleName: player_character_bundle
-  assetBundleVariant: pink_twin
+  assetBundleName: pink_twin
+  assetBundleVariant: unity3d

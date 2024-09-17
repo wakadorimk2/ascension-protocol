@@ -86,7 +86,7 @@ public class PlayerPatch
         var playerCharacterReplace = playerObject.AddComponent<PlayerCharacterReplace>();
 
         // プレハブの設定などを行う
-        playerCharacterReplace.vroidCharacterPrefab = Resources.Load<GameObject>("VRoidCharacterPrefab");
+        playerCharacterReplace.vroidCharacterPrefab = Resources.Load<GameObject>("pink_twin");
         if (playerCharacterReplace.vroidCharacterPrefab == null)
         {
             Debug.LogError("VRoidキャラクタープレハブが読み込まれませんでした。パスを確認してください。");
