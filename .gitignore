@@ -95,6 +95,7 @@ artifacts/
 *.svd
 
 # Unity3D generated meta files
+*.meta
 *.pidb.meta
 *.booproj.meta
 *.sln.meta
@@ -102,6 +103,8 @@ artifacts/
 *.unityproj.meta
 *.tmproj.meta
 *.svd.meta
+
+*.manifest
 
 # Unity3D generated file on crash reports
 sysinfo.txt
@@ -122,7 +125,3 @@ Builds/
 Logs/
 UserSettings/
 Packages/*
-
-# マニフェストファイル
-*.manifest
-*.meta
