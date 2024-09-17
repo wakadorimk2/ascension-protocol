@@ -122,3 +122,7 @@ Builds/
 Logs/
 UserSettings/
 Packages/*
+
+# マニフェストファイル
+*.manifest
+*.meta
