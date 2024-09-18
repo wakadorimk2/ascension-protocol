@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.IO;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using HarmonyLib;
@@ -17,7 +18,8 @@ public class MyModAPI : IModApi
 
 public class PlayerCharacterReplace : MonoBehaviour
 {
-    public string assetBundlePath = "Assets/AssetBundles/pink_twin.unity3d"; // AssetBundleのパスを指定
+    public string UserProfilePath = "C:/Users/wakad/AppData/Roaming/7DaysToDie/Mods/AscensionProtocol";
+    public string assetBundleName = "pink_twin.unity3d"; // AssetBundleのパスを指定
 
     // VRoidモデルのPrefab（インポートしたキャラクター）
     public GameObject vroidCharacterPrefab;
@@ -29,10 +31,17 @@ public class PlayerCharacterReplace : MonoBehaviour
     private Transform playerTransform;
 
     // Start is called before the first frame update
-    void Start()
+    IEnumerator Start()
     {
+        // プレイヤーモデルがシーンにロードされるのを待つ
+        yield return new WaitForSeconds(0.5f); // 0.5秒待機
+
         // プレイヤーの元のモデルを取得
-        originalPlayerModel = GameObject.FindWithTag("PlayerModel");
+        EntityPlayer player = FindObjectOfType<EntityPlayer>();  // EntityPlayerコンポーネントを持つオブジェクトを検索
+        if (player != null)
+        {
+            originalPlayerModel = player.gameObject;
+        }
 
         if (originalPlayerModel != null)
         {
@@ -42,7 +51,7 @@ public class PlayerCharacterReplace : MonoBehaviour
             if (vroidCharacterPrefab == null)
             {
                 Debug.LogError("VRoidキャラクタープレハブの読み込みに失敗しました。");
-                return;
+                yield break;
             }
             else
             {
@@ -55,6 +64,9 @@ public class PlayerCharacterReplace : MonoBehaviour
                 originalPlayerModel.SetActive(false);
 
                 GameObject newPlayerModel = Instantiate(vroidCharacterPrefab, playerTransform.position, playerTransform.rotation);
+
+                // デバッグメッセージでモデルの位置などを確認
+                Debug.Log($"VRoidモデルを生成しました。位置: {playerTransform.position}, 回転: {playerTransform.rotation}");
 
                 // 生成されたVRoidキャラクターをプレイヤーに追従させる
                 newPlayerModel.transform.SetParent(playerTransform);
@@ -88,6 +100,11 @@ public class PlayerCharacterReplace : MonoBehaviour
 
     public GameObject LoadCharacterFromAssetBundle()
     {
+        // 自分の位置とディレクトリを表示
+        string currentDirectory = Directory.GetCurrentDirectory();
+        Debug.LogFormat("Current Directory: {0}", currentDirectory);
+
+        string assetBundlePath = Path.Combine(UserProfilePath, assetBundleName);
         AssetBundle bundle = AssetBundle.LoadFromFile(assetBundlePath);
 
         if (bundle != null)

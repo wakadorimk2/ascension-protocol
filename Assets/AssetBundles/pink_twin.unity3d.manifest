@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 4102725141
+CRC: 385314730
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: e8ae3d5229409b8f486f8bb6f3edd88b
+    Hash: ead6ae6493673abb6997c5f4e2049b54
   TypeTreeHash:
     serializedVersion: 2
-    Hash: c645a9ac059f327171650a450703d64c
+    Hash: a71ffd6e17b7edadc099def06fdd4436
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: e8ae3d5229409b8f486f8bb6f3edd88b
+    Hash: ead6ae6493673abb6997c5f4e2049b54
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -29,17 +29,17 @@ ClassTypes:
 - Class: 95
   Script: {instanceID: 0}
 - Class: 114
-  Script: {fileID: 11500000, guid: 8c8b2024ae0d0944eb878d90212bf21b, type: 3}
+  Script: {fileID: 11500000, guid: 35bfb658269b2af478e501de243deda6, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 177ea458e237fee41b0902e3006c744b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 97a39af5b64ede64e86b92b5bf94a0e7, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 88684271e27adb843b6570957c9e7637, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 0a942e03b39600e41a1b161e958048f7, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 35bfb658269b2af478e501de243deda6, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 97a39af5b64ede64e86b92b5bf94a0e7, type: 3}
+  Script: {fileID: 11500000, guid: 8c8b2024ae0d0944eb878d90212bf21b, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: bfba4ccd3f854e64f868ce83553071a9, type: 3}
 - Class: 115
@@ -67,4 +67,5 @@ SerializeReferenceClassIdentifiers:
   ClassName: UniVRM10.Vrm10InstanceSpringBone/Spring
 Assets:
 - "Assets/\u30D4\u30F3\u30AF\u306E\u30C4\u30A4\u30F3\u30C6\u3061\u3083\u3093.prefab"
+- "Assets/\u30D4\u30F3\u30AF\u306E\u30C4\u30A4\u30F3\u30C6\u3061\u3083\u3093.vrm"
 Dependencies: []
