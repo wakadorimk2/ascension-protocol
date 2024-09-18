@@ -36,6 +36,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "\u30D4\u30F3\u30AF\u306E\u30C4\u30A4\u30F3\u30C6\u3061\u3083\u3093"
       objectReference: {fileID: 0}
+    - target: {fileID: -1728013695380148634, guid: f64806f43e12586438499ac1cdccbf5d, type: 3}
+      propertyPath: m_TagString
+      value: PlayerModel
+      objectReference: {fileID: 0}
     - target: {fileID: 2953604236389334553, guid: f64806f43e12586438499ac1cdccbf5d, type: 3}
       propertyPath: m_DirtyAABB
       value: 0
