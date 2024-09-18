@@ -17,6 +17,8 @@ public class MyModAPI : IModApi
 
 public class PlayerCharacterReplace : MonoBehaviour
 {
+    public string assetBundlePath = "Assets/AssetBundles/pink_twin.unity3d"; // AssetBundleのパスを指定
+
     // VRoidモデルのPrefab（インポートしたキャラクター）
     public GameObject vroidCharacterPrefab;
 
@@ -34,20 +36,33 @@ public class PlayerCharacterReplace : MonoBehaviour
 
         if (originalPlayerModel != null)
         {
-            // プレイヤーのTransformを取得（位置・回転・スケールを保持する）
-            playerTransform = originalPlayerModel.transform;
+            // プレハブを読み込む
+            vroidCharacterPrefab = LoadCharacterFromAssetBundle();
 
-            // 元のプレイヤーモデルを非表示または削除
-            originalPlayerModel.SetActive(false);
+            if (vroidCharacterPrefab == null)
+            {
+                Debug.LogError("VRoidキャラクタープレハブの読み込みに失敗しました。");
+                return;
+            }
+            else
+            {
+                Debug.Log("VRoidキャラクタープレハブの読み込みに成功しました。");
 
-            // VRoidキャラクターをプレイヤーの位置に生成
-            GameObject newPlayerModel = Instantiate(vroidCharacterPrefab, playerTransform.position, playerTransform.rotation);
+                // プレイヤーのTransformを取得（位置・回転・スケールを保持する）
+                playerTransform = originalPlayerModel.transform;
 
-            // 生成されたVRoidキャラクターをプレイヤーに追従させる
-            newPlayerModel.transform.SetParent(playerTransform);
+                // 元のプレイヤーモデルを非表示または削除
+                originalPlayerModel.SetActive(false);
 
-            // アニメーションやリグの設定をプレイヤーに対応させる
-            SetupPlayerAnimations(newPlayerModel);
+                GameObject newPlayerModel = Instantiate(vroidCharacterPrefab, playerTransform.position, playerTransform.rotation);
+
+                // 生成されたVRoidキャラクターをプレイヤーに追従させる
+                newPlayerModel.transform.SetParent(playerTransform);
+
+                // アニメーションやリグの設定をプレイヤーに対応させる
+                SetupPlayerAnimations(newPlayerModel);
+
+            }
         }
         else
         {
@@ -70,28 +85,51 @@ public class PlayerCharacterReplace : MonoBehaviour
             Debug.LogError("VRoidモデルにAnimatorがありません。リグ設定を確認してください。");
         }
     }
-}
 
-[HarmonyPatch(typeof(EntityPlayer))]  // Playerクラスにパッチを適用
-[HarmonyPatch("Start")]  // プレイヤーの開始処理にパッチを適用
-public class PlayerPatch
-{
-    // Prefixはメソッドの実行前に呼ばれます
-    public static void Prefix(EntityPlayer __instance)
+    public GameObject LoadCharacterFromAssetBundle()
     {
-        Debug.Log("Custom Player Model Loaded");
+        AssetBundle bundle = AssetBundle.LoadFromFile(assetBundlePath);
 
-        // 既存のプレイヤーゲームオブジェクトにPlayerCharacterReplaceコンポーネントを追加
-        GameObject playerObject = __instance.gameObject;
-        var playerCharacterReplace = playerObject.AddComponent<PlayerCharacterReplace>();
-
-        // プレハブの設定などを行う
-        playerCharacterReplace.vroidCharacterPrefab = Resources.Load<GameObject>("pink_twin");
-        if (playerCharacterReplace.vroidCharacterPrefab == null)
+        if (bundle != null)
         {
-            Debug.LogError("VRoidキャラクタープレハブが読み込まれませんでした。パスを確認してください。");
+            GameObject prefab = bundle.LoadAsset<GameObject>("ピンクのツインテちゃん"); // プレハブ名を指定
+
+            if (prefab != null)
+            {
+                bundle.Unload(false);
+                return prefab;
+            }
+            else
+            {
+                Debug.LogError("プレハブがバンドルに存在しません。");
+                return null;
+            }
+        }
+        else
+        {
+            Debug.LogError("アセットバンドルのロードに失敗しました。パスを確認してください。");
+            return null;
+        }
+    }
+
+    [HarmonyPatch(typeof(EntityPlayer))]  // Playerクラスにパッチを適用
+    [HarmonyPatch("Start")]  // プレイヤーの開始処理にパッチを適用
+    public class PlayerPatch
+    {
+        // Prefixはメソッドの実行前に呼ばれます
+        public static void Prefix(EntityPlayer __instance)
+        {
+            Debug.Log("Custom Player Model Loaded");
+
+            // 既存のプレイヤーゲームオブジェクトにPlayerCharacterReplaceコンポーネントを追加
+            GameObject playerObject = __instance.gameObject;
+            var playerCharacterReplace = playerObject.AddComponent<PlayerCharacterReplace>();
+
+            // プレハブの設定などを行う
+
+
+            Debug.Log("Custom Player Model Initialized");
         }
 
-        Debug.Log("Custom Player Model Initialized");
     }
 }
