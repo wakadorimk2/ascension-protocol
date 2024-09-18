@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: 2c4f75c8f1310fc48ab815d44beb5142
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - vroidCharacterPrefab: {fileID: 3397261183309561861, guid: fb54ee06dc31ca744887ac6e62e4b5c5, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
