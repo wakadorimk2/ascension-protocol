@@ -4,15 +4,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using HarmonyLib;
 
-public class MyModAPI : IModApi
+public class MyModApi : IModApi
 {
     public void InitMod(Mod _modInstance)
     {
         Debug.Log("Initializing Mod API");
 
-        // モデルを置き換える
-        var harmony = new Harmony("com.ascension-protocol.mod");
-        harmony.PatchAll();
+        try
+        {
+            var harmony = new Harmony("com.ascension-protocol.mod");
+            harmony.PatchAll();
+            Debug.Log("Harmony Patching Successful");
+        }
+        catch (System.Exception ex)
+        {
+            Debug.Log("Harmony Patching Failed: " + ex.Message);
+        }
     }
 }
 
