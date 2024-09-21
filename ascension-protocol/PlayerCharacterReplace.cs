@@ -1,12 +1,26 @@
-﻿using System.IO;
+﻿// <copyright file="PlayerCharacterReplace.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+/// <summary>
+/// PlayerCharacterReplace クラスの説明
+/// </summary>
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using System.IO;
 using HarmonyLib;
+using UnityEngine;
 using UnityEngine.Windows;
 
-public class MyModApi : IModApi
+/// <summary>
+/// プレイヤーキャラクターの置き換えを行うクラス.
+/// </summary>
+public class PlayerCharacterReplace : IModApi
 {
+    /// <summary>
+    /// Initializes the mod.
+    /// </summary>
+    /// <param name="_modInstance">The mod instance.</param>
     public void InitMod(Mod _modInstance)
     {
         Debug.Log("Initializing Mod API");
@@ -26,7 +40,7 @@ public class MyModApi : IModApi
 
 [HarmonyPatch(typeof(GameManager))]
 [HarmonyPatch("StartGame")]
-public class GameManagerPatch
+public class GameManagerStartGamePatch
 {
     public static void Postfix(GameManager __instance)
     {
