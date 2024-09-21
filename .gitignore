@@ -117,3 +117,6 @@ Builds/
 Logs/
 UserSettings/
 Packages/*
+*.meta
+*.fbx
+*.prefab
