@@ -187,15 +187,6 @@ public class PlayerCharacterReplace : MonoBehaviour
             Debug.Log("VRoid model instantiated successfully");
         }
 
-        void FixedUpdate()
-        {
-            if (playerTransform != null && newPlayerModel != null)
-            {
-                newPlayerModel.transform.position = playerTransform.position;
-                newPlayerModel.transform.rotation = playerTransform.rotation;
-            }
-        }
-
         // モデルの設定
         // モデルをプレイヤーの子オブジェクトに設定
         newPlayerModel.transform.SetParent(player.transform, false);
@@ -206,8 +197,6 @@ public class PlayerCharacterReplace : MonoBehaviour
 
         // モデルのローカル位置を調整
         newPlayerModel.transform.localPosition = new Vector3(0, 0, 0.5f); // Z軸方向に0.5f前方に移動
-
-        FixedUpdate();
 
         Debug.Log("Model position, rotation, scale set.");
 
