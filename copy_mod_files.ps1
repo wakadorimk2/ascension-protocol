@@ -1,6 +1,6 @@
 # 変数設定
 $projectRoot = "C:\Users\wakad\Projects\ascension-protocol"  # プロジェクトのルートパス
-$dllSourcePath = "$projectRoot\ascension-protocol\bin\Release\net8"  # DLLのビルドパス
+$dllSourcePath = "$projectRoot\ascension-protocol\bin\Release\net481"  # DLLのビルドパス
 $fbxSourcePath = "$projectRoot\Assets\AssetBundles"  # アセットバンドルのあるパス
 $modsOutputPath = "C:\Users\wakad\AppData\Roaming\7DaysToDie\Mods"  # Modsフォルダのパス
 $modFolderName = "AscensionProtocol"  # Modsフォルダ内のフォルダ名
@@ -17,7 +17,7 @@ if (-Not (Test-Path "$modsOutputPath\$modFolderName")) {
 
 # DLLファイルをコピー
 Write-Host "DLLファイルをコピー中..."
-Copy-Item "$dllSourcePath\*.dll" -Destination "$modsOutputPath\$modFolderName" -Force
+Copy-Item "$dllSourcePath\ascension-protocol.dll" -Destination "$modsOutputPath\$modFolderName" -Force
 
 # アセットバンドルをコピー
 Write-Host "アセットバンドルをコピー中..."
