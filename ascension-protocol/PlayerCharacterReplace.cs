@@ -261,28 +261,31 @@ public class PlayerCharacterReplace : MonoBehaviour
             Debug.Log("Animatorコンポーネントを追加しました。");
         }
 
-        // プレイヤーのAnimatorを取得
+        // VRoidモデルのアバターを使用
+        Animator vroidAnimator = vroidCharacterPrefab.GetComponent<Animator>();
+        if (vroidAnimator != null)
+        {
+            playerAnimator.avatar = vroidAnimator.avatar;
+            Debug.Log("VRoidモデルのアバターを設定しました。");
+        }
+        else
+        {
+            Debug.LogError("VRoidモデルにAnimatorが存在しません。");
+        }
+
+        // オリジナルのAnimator Controllerを設定
         Animator originalAnimator = player.GetComponentInChildren<Animator>();
         if (originalAnimator != null)
         {
             playerAnimator.runtimeAnimatorController = originalAnimator.runtimeAnimatorController;
-            playerAnimator.avatar = originalAnimator.avatar;
-
-            // デバッグメッセージ
-            Debug.Log("Animator ControllerとAvatarを設定しました。");
+            Debug.Log("Animator Controllerを設定しました。");
         }
         else
         {
-            Debug.LogWarning("元のプレイヤーのAnimatorが見つかりません。プレイヤーの子オブジェクトを調べます。");
-
-            // プレイヤーの子オブジェクトを探索
-            Animator[] animators = player.GetComponentsInChildren<Animator>(true);
-            foreach (Animator anim in animators)
-            {
-                Debug.Log("Found Animator in child object: " + anim.gameObject.name);
-            }
+            Debug.LogWarning("元のプレイヤーのAnimatorが見つかりません。");
         }
     }
+
     void SetLayerRecursively(GameObject obj, int newLayer)
     {
         if (obj == null)
