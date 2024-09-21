@@ -62,20 +62,27 @@ public class GameManagerPatch
     }
 }
 
-[HarmonyPatch(typeof(EntityPlayerLocal))]
-[HarmonyPatch("Awake")]
+[HarmonyPatch(typeof(EntityPlayerLocal))]  // EntityPlayerLocalクラスにパッチを適用（ローカルプレイヤー）
+[HarmonyPatch("Awake")]  // プレイヤーの開始処理にパッチを適用
+
 public class PlayerPatch
 {
+    // Postfixはメソッドの実行後に呼ばれます
     public static void Postfix(EntityPlayerLocal __instance)
     {
-        Debug.Log("Player has spawned in world.");
+        Debug.Log("Custom Player Model Loaded");
 
-        var playerCharacterReplace = __instance.gameObject.GetComponent<PlayerCharacterReplace>();
+        // 既存のプレイヤーゲームオブジェクトにPlayerCharacterReplaceコンポーネントを追加
+        GameObject playerObject = __instance.gameObject;
+        var playerCharacterReplace = playerObject.GetComponent<PlayerCharacterReplace>();
         if (playerCharacterReplace == null)
         {
-            playerCharacterReplace = __instance.gameObject.AddComponent<PlayerCharacterReplace>();
-            Debug.Log("PlayerCharacterReplace component added to player.");
+            playerCharacterReplace = playerObject.AddComponent<PlayerCharacterReplace>();
         }
+
+        // プレハブの設定などを行う（必要に応じて）
+
+        Debug.Log("Custom Player Model Initialized");
     }
 }
 
@@ -95,29 +102,6 @@ public class PlayerCharacterReplace : MonoBehaviour
 
     // プレイヤーが初期化されたかどうかを確認するフラグ
     private bool isInitialized = false;
-
-    [HarmonyPatch(typeof(EntityPlayerLocal))]  // EntityPlayerLocalクラスにパッチを適用（ローカルプレイヤー）
-    [HarmonyPatch("Awake")]  // プレイヤーの開始処理にパッチを適用
-    public class PlayerPatch
-    {
-        // Postfixはメソッドの実行後に呼ばれます
-        public static void Postfix(EntityPlayerLocal __instance)
-        {
-            Debug.Log("Custom Player Model Loaded");
-
-            // 既存のプレイヤーゲームオブジェクトにPlayerCharacterReplaceコンポーネントを追加
-            GameObject playerObject = __instance.gameObject;
-            var playerCharacterReplace = playerObject.GetComponent<PlayerCharacterReplace>();
-            if (playerCharacterReplace == null)
-            {
-                playerCharacterReplace = playerObject.AddComponent<PlayerCharacterReplace>();
-            }
-
-            // プレハブの設定などを行う（必要に応じて）
-
-            Debug.Log("Custom Player Model Initialized");
-        }
-    }
 
     // Start is called before the first frame update
     IEnumerator Start()
