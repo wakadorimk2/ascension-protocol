@@ -3,7 +3,11 @@
   <PropertyGroup>
     <TargetFramework>net481</TargetFramework>
     <RootNamespace>ascension_protocol</RootNamespace>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest-All</AnalysisLevel>
   </PropertyGroup>
+
+
 
   <ItemGroup>
     <Reference Include="0Harmony">
