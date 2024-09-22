@@ -105,7 +105,11 @@ namespace Domain.Services
         private GameObject InstantiateCharacterModel(EntityPlayerLocal player)
         {
             Debug.Log("Instantiate VRoid model");
-            GameObject newPlayerModel = GameObject.Instantiate(vroidCharacterPrefab, player.transform.position, player.transform.rotation);
+
+            Transform playerTransform = player.transform;
+
+            GameObject newPlayerModel = GameObject.Instantiate(vroidCharacterPrefab, playerTransform.position, playerTransform.rotation);
+            
             if (newPlayerModel == null)
             {
                 Debug.LogError("Failed to instantiate VRoid model.");
@@ -116,16 +120,22 @@ namespace Domain.Services
                 Debug.Log("VRoid model instantiated successfully");
             }
 
-            // モデルをプレイヤーの子オブジェクトに設定
-            newPlayerModel.transform.SetParent(player.transform, false);
-            newPlayerModel.transform.localPosition = new Vector3(0, 0, 0);
-            newPlayerModel.transform.localRotation = Quaternion.identity;
-            newPlayerModel.transform.localScale = Vector3.one;
+            // 'Root'オブジェクトを取得
+            Transform rootTransform = newPlayerModel.transform.Find("Root");
+            if (rootTransform == null)
+            {
+                Debug.LogError("'root' object not found in the model.");
+                return null;
+            }
+
+            rootTransform.transform.SetParent(playerTransform, false);
 
             // レイヤー設定
             Utilities.SetLayerRecursively(newPlayerModel, player.gameObject.layer);
+            rootTransform.transform.localRotation = Quaternion.identity;
+            rootTransform.transform.localScale = Vector3.one;
 
-            return newPlayerModel;
+            return rootTransform.gameObject;
         }
 
         private void SetupPlayerAnimations(GameObject newPlayerModel, EntityPlayerLocal player)
