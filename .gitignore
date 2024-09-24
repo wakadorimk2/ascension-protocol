@@ -120,3 +120,11 @@ Packages/*
 *.meta
 *.fbx
 *.prefab
+*.csproj
+*.sln
+*.suo
+*.user
+*.userprefs
+*.unityproj
+*.pidb.meta
+*.pidb
