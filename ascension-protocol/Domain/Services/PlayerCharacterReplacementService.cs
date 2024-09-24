@@ -104,7 +104,7 @@ namespace Domain.Services
         {
             Debug.Log("Instantiating VRoid model.");
 
-            // 1. モデルのインスタンス化
+            // モデルのインスタンス化
             GameObject newPlayerModel = GameObject.Instantiate(vroidCharacterPrefab);
 
             if (newPlayerModel == null)
@@ -117,31 +117,16 @@ namespace Domain.Services
                 Debug.Log("VRoid model instantiated successfully.");
             }
 
-            // 2. 'Root' 子オブジェクトを取得
-            Transform rootTransform = newPlayerModel.transform.Find("Root");
-            if (rootTransform == null)
-            {
-                Debug.LogError("'Root' object not found in the model.");
-                return null;
-            }
-
-            // 3. 'Root' 子オブジェクトで位置調整を行う
-            float yOffset = 1.0f; // 必要に応じて調整
-            Vector3 desiredLocalPosition = new Vector3(0, yOffset, 0);
-            rootTransform.localPosition = desiredLocalPosition;
-            rootTransform.localRotation = Quaternion.identity;
-            rootTransform.localScale = Vector3.one;
-
-            // 4. ルートオブジェクトをプレイヤーの子オブジェクトに設定
+            // ルートオブジェクトをプレイヤーの子オブジェクトに設定
             newPlayerModel.transform.SetParent(player.transform, false);
             newPlayerModel.transform.localPosition = Vector3.zero;
             newPlayerModel.transform.localRotation = Quaternion.identity;
             newPlayerModel.transform.localScale = Vector3.one;
 
-            // 5. レイヤー設定
+            // レイヤー設定
             Common.Utilities.SetLayerRecursively(newPlayerModel, player.gameObject.layer);
 
-            // 6. ルートオブジェクトを返す
+            // ルートオブジェクトを返す
             return newPlayerModel;
         }
 
