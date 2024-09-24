@@ -135,9 +135,10 @@ namespace Domain.Services
 
             // 4. ルートオブジェクトをプレイヤーの子オブジェクトに設定
             newPlayerModel.transform.SetParent(player.transform, false);
-            newPlayerModel.transform.localPosition = Vector3.zero;
-            newPlayerModel.transform.localRotation = Quaternion.identity;
-            newPlayerModel.transform.localScale = Vector3.one;
+            // 身長の半分を上げる
+            newPlayerModel.transform.localPosition += new Vector3(0, 0.5f, 0);
+            newPlayerModel.transform.localRotation = rootTransform.localRotation;
+            newPlayerModel.transform.localScale = rootTransform.localScale;
 
             // 5. レイヤー設定
             Common.Utilities.SetLayerRecursively(newPlayerModel, player.gameObject.layer);
