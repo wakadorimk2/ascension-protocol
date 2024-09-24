@@ -23,6 +23,14 @@ namespace Infrastructure.UnityComponents
             StartCoroutine(InitializeWhenPlayerReady());
         }
 
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.F1))
+            {
+                Debug.Log("F1 key pressed.");
+            }
+        }
+
         private IEnumerator InitializeWhenPlayerReady()
         {
             // プレイヤーが完全にロードされるまで待機
