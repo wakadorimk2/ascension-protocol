@@ -83,7 +83,6 @@ namespace Domain.Services
             }
 
             // アニメーションの設定
-
             SetupPlayerAnimations(newPlayerModel, player);
 
         }
@@ -104,12 +103,11 @@ namespace Domain.Services
 
         private GameObject InstantiateCharacterModel(EntityPlayerLocal player)
         {
-            Debug.Log("Instantiate VRoid model");
+            Debug.Log("Instantiating VRoid model.");
 
-            Transform playerTransform = player.transform;
+            // 1. モデルのインスタンス化
+            GameObject newPlayerModel = GameObject.Instantiate(vroidCharacterPrefab);
 
-            GameObject newPlayerModel = GameObject.Instantiate(vroidCharacterPrefab, playerTransform.position, playerTransform.rotation);
-            
             if (newPlayerModel == null)
             {
                 Debug.LogError("Failed to instantiate VRoid model.");
@@ -117,57 +115,74 @@ namespace Domain.Services
             }
             else
             {
-                Debug.Log("VRoid model instantiated successfully");
+                Debug.Log("VRoid model instantiated successfully.");
             }
 
-            // 'Root'オブジェクトを取得
+            // 2. 'Root' 子オブジェクトを取得
             Transform rootTransform = newPlayerModel.transform.Find("Root");
             if (rootTransform == null)
             {
-                Debug.LogError("'root' object not found in the model.");
+                Debug.LogError("'Root' object not found in the model.");
                 return null;
             }
 
-            rootTransform.transform.SetParent(playerTransform, false);
+            // 3. 'Root' 子オブジェクトで位置調整を行う
+            // 必要に応じて位置、回転、スケールを設定
+            Vector3 desiredLocalPosition = new Vector3(0, 0, 0); // 必要な位置オフセット
+            rootTransform.localPosition = desiredLocalPosition; // 必要な位置オフセット
+            rootTransform.localRotation = Quaternion.identity;
+            rootTransform.localScale = Vector3.one;
 
-            // レイヤー設定
-            Utilities.SetLayerRecursively(newPlayerModel, player.gameObject.layer);
-            rootTransform.transform.localRotation = Quaternion.identity;
-            rootTransform.transform.localScale = Vector3.one;
+            // 4. ルートオブジェクトをプレイヤーの子オブジェクトに設定
+            newPlayerModel.transform.SetParent(player.transform, false);
+            newPlayerModel.transform.localPosition = Vector3.zero;
+            newPlayerModel.transform.localRotation = Quaternion.identity;
+            newPlayerModel.transform.localScale = Vector3.one;
 
-            return rootTransform.gameObject;
+            // 5. レイヤー設定
+            Common.Utilities.SetLayerRecursively(newPlayerModel, player.gameObject.layer);
+
+            // 6. アニメーションの設定
+            SetupPlayerAnimations(newPlayerModel, player);
+
+            // 7. ルートオブジェクトを返す
+            return newPlayerModel;
         }
 
-        private void SetupPlayerAnimations(GameObject newPlayerModel, EntityPlayerLocal player)
+
+        private static void SetupPlayerAnimations(GameObject newPlayerModel, EntityPlayerLocal player)
         {
             Animator playerAnimator = newPlayerModel.GetComponent<Animator>();
+
             if (playerAnimator == null)
             {
-                playerAnimator = newPlayerModel.AddComponent<Animator>();
-                Debug.Log("Animatorコンポーネントを追加しました。");
+                Debug.LogError("Animator component not found on the new player model's root object.");
+                return;
             }
 
-            Animator vroidAnimator = vroidCharacterPrefab.GetComponent<Animator>();
-            if (vroidAnimator != null)
+            // 元のプレイヤーの Animator Controller を取得
+            Animator originalAnimator = player.GetComponent<Animator>();
+            if (originalAnimator == null)
             {
-                playerAnimator.avatar = vroidAnimator.avatar;
-                Debug.Log("VRoidモデルのアバターを設定しました。");
+                originalAnimator = player.GetComponentInChildren<Animator>();
             }
-            else
-            {
-                Debug.LogError("VRoidモデルにAnimatorが存在しません。");
-            }
+            // Animator のパラメータをログ出力
+            Common.Utilities.LogAnimatorParameters(originalAnimator);
 
-            Animator originalAnimator = player.GetComponentInChildren<Animator>();
+            // Animator にアタッチされているアニメーションクリップをログ出力
+            Common.Utilities.LogAnimatorClips(originalAnimator);
+
             if (originalAnimator != null)
             {
+                // Animator Controller を設定
                 playerAnimator.runtimeAnimatorController = originalAnimator.runtimeAnimatorController;
-                Debug.Log("Animator Controllerを設定しました。");
+                Debug.Log("Animator Controller を設定しました。");
             }
             else
             {
-                Debug.LogWarning("元のプレイヤーのAnimatorが見つかりません。");
+                Debug.LogError("Original Animator Controller not found on the player.");
             }
         }
+
     }
 }
