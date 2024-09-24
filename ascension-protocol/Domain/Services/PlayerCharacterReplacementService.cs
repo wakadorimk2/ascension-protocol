@@ -84,7 +84,6 @@ namespace Domain.Services
 
             // アニメーションの設定
             SetupPlayerAnimations(newPlayerModel, player);
-
         }
 
         private static void HideOriginalPlayerModel(EntityPlayerLocal player)
@@ -127,63 +126,59 @@ namespace Domain.Services
             }
 
             // 3. 'Root' 子オブジェクトで位置調整を行う
-            // 必要に応じて位置、回転、スケールを設定
-            Vector3 desiredLocalPosition = new Vector3(0, 0, 0); // 必要な位置オフセット
-            rootTransform.localPosition = desiredLocalPosition; // 必要な位置オフセット
+            float yOffset = 1.0f; // 必要に応じて調整
+            Vector3 desiredLocalPosition = new Vector3(0, yOffset, 0);
+            rootTransform.localPosition = desiredLocalPosition;
             rootTransform.localRotation = Quaternion.identity;
             rootTransform.localScale = Vector3.one;
 
             // 4. ルートオブジェクトをプレイヤーの子オブジェクトに設定
             newPlayerModel.transform.SetParent(player.transform, false);
-            // 身長の半分を上げる
-            newPlayerModel.transform.localPosition += new Vector3(0, 0.5f, 0);
-            newPlayerModel.transform.localRotation = rootTransform.localRotation;
-            newPlayerModel.transform.localScale = rootTransform.localScale;
+            newPlayerModel.transform.localPosition = Vector3.zero;
+            newPlayerModel.transform.localRotation = Quaternion.identity;
+            newPlayerModel.transform.localScale = Vector3.one;
 
             // 5. レイヤー設定
             Common.Utilities.SetLayerRecursively(newPlayerModel, player.gameObject.layer);
 
-            // 6. アニメーションの設定
-            SetupPlayerAnimations(newPlayerModel, player);
-
-            // 7. ルートオブジェクトを返す
+            // 6. ルートオブジェクトを返す
             return newPlayerModel;
         }
 
-
         private static void SetupPlayerAnimations(GameObject newPlayerModel, EntityPlayerLocal player)
         {
-            Animator playerAnimator = newPlayerModel.GetComponent<Animator>();
-
-            if (playerAnimator == null)
+            // 元のプレイヤーのAnimatorを取得
+            Animator originalAnimator = player.GetComponent<Animator>() ?? player.GetComponentInChildren<Animator>();
+            if (originalAnimator == null)
             {
-                Debug.LogError("Animator component not found on the new player model's root object.");
+                Debug.LogError("Original Animator not found on the player.");
                 return;
             }
 
-            // 元のプレイヤーの Animator Controller を取得
-            Animator originalAnimator = player.GetComponent<Animator>();
-            if (originalAnimator == null)
+            // 新しいモデルのAnimatorを取得
+            Animator newAnimator = newPlayerModel.GetComponent<Animator>() ?? newPlayerModel.GetComponentInChildren<Animator>();
+            if (newAnimator == null)
             {
-                originalAnimator = player.GetComponentInChildren<Animator>();
+                Debug.LogError("Animator component not found on the new player model.");
+                return;
             }
-            // Animator のパラメータをログ出力
-            Common.Utilities.LogAnimatorParameters(originalAnimator);
 
-            // Animator にアタッチされているアニメーションクリップをログ出力
-            Common.Utilities.LogAnimatorClips(originalAnimator);
+            // 元の Animator Controller を直接適用
+            newAnimator.runtimeAnimatorController = originalAnimator.runtimeAnimatorController;
+            newAnimator.avatar = originalAnimator.avatar;
 
-            if (originalAnimator != null)
+            // 実際に存在するステート名を使用してアニメーションを再生
+            string desiredState = "idle"; // 実際のステート名に変更
+
+            if (newAnimator.HasState(0, Animator.StringToHash(desiredState)))
             {
-                // Animator Controller を設定
-                playerAnimator.runtimeAnimatorController = originalAnimator.runtimeAnimatorController;
-                Debug.Log("Animator Controller を設定しました。");
+                newAnimator.Play(desiredState, 0);
+                Debug.Log($"\"{desiredState}\" ステートを再生しました。");
             }
             else
             {
-                Debug.LogError("Original Animator Controller not found on the player.");
+                Debug.LogError($"\"{desiredState}\" ステートがAnimator Controllerに存在しません。");
             }
         }
-
     }
 }

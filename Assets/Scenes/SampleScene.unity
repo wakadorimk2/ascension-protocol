@@ -361,6 +361,10 @@ PrefabInstance:
       value: pink_twin
       objectReference: {fileID: 0}
     - target: {fileID: 2366620927351540380, guid: 1bc932792389d3f4ba698594d6c70158, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: ff44df60676ffbd43920775045ed800e, type: 3}
+    - target: {fileID: 2366620927351540380, guid: 1bc932792389d3f4ba698594d6c70158, type: 3}
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
