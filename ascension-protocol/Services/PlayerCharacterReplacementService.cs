@@ -9,14 +9,18 @@ namespace Domain.Services
     public class PlayerCharacterReplacementService
     {
         private readonly string userProfilePath;
-        private readonly string assetBundleName;
+        private readonly string bundleName;
+        private readonly string modelBundlePath;
+        private readonly string prefabName;
         private GameObject vroidCharacterPrefab;
         private bool isCharacterReplaced; // キャラクターが置き換えられたかどうか
 
-        public PlayerCharacterReplacementService(string userProfilePath, string assetBundleName)
+        public PlayerCharacterReplacementService(string userProfilePath, string modelBundlePath, string bundleName, string prefabName)
         {
             this.userProfilePath = userProfilePath;
-            this.assetBundleName = assetBundleName;
+            this.modelBundlePath = modelBundlePath;
+            this.bundleName = bundleName;
+            this.prefabName = prefabName;
         }
 
         public IEnumerator ReplacePlayerCharacter(EntityPlayerLocal player, MonoBehaviour context)
@@ -41,7 +45,7 @@ namespace Domain.Services
             if (vroidCharacterPrefab == null)
             {
                 // アセットバンドルの読み込み
-                var assetBundleLoader = new AssetBundleLoader(userProfilePath, assetBundleName);
+                var assetBundleLoader = new AssetBundleLoader(userProfilePath, modelBundlePath, bundleName, prefabName);
                 yield return context.StartCoroutine(assetBundleLoader.LoadAssetBundleAsync(prefab =>
                 {
                     if (prefab != null)

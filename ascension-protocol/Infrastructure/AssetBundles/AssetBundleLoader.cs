@@ -10,15 +10,17 @@ namespace Infrastructure.AssetBundles
     {
 
         private readonly string userProfilePath;
-        private readonly string assetBundleName;
+        private readonly string bundleName;
+        private readonly string modelBundlePath;
+        private readonly string prefabName;
         private static AssetBundle loadedAssetBundle;
 
-        public AssetBundleLoader(string userProfilePath, string assetBundleName)
-
-
+        public AssetBundleLoader(string userProfilePath, string modelBundlePath, string bundleName, string prefabName)
         {
             this.userProfilePath = userProfilePath;
-            this.assetBundleName = assetBundleName;
+            this.modelBundlePath = modelBundlePath;
+            this.bundleName = bundleName;
+            this.prefabName = prefabName;
         }
 
         public IEnumerator LoadAssetBundleAsync(System.Action<GameObject> onComplete)
@@ -28,14 +30,13 @@ namespace Infrastructure.AssetBundles
                 throw new ArgumentNullException(nameof(onComplete));
             }
 
-            string assetBundlePath = Path.Combine(userProfilePath, assetBundleName);
+            string assetBundlePath = Path.Combine(userProfilePath, modelBundlePath, bundleName);
             AssetBundleCreateRequest request = AssetBundle.LoadFromFileAsync(assetBundlePath);
             yield return request;
 
             loadedAssetBundle = request.assetBundle;
             if (loadedAssetBundle != null)
             {
-                string prefabName = Path.GetFileNameWithoutExtension(assetBundleName);
                 AssetBundleRequest prefabRequest = loadedAssetBundle.LoadAssetAsync<GameObject>(prefabName);
                 yield return prefabRequest;
 

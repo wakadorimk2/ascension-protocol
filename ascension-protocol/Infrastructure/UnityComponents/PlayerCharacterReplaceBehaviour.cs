@@ -12,23 +12,17 @@ namespace Infrastructure.UnityComponents
         void Awake()
         {
             Debug.Log("PlayerCharacterReplaceBehaviour Awake called.");
-            string userProfilePath = "C:/Users/wakad/AppData/Roaming/7DaysToDie/Mods/AscensionProtocol";
-            string assetBundleName = "pink_twin.bundle";
-            replacementService = new PlayerCharacterReplacementService(userProfilePath, assetBundleName);
+            string userProfilePath = "C:/Users/wakad/AppData/Roaming/7DaysToDie/Mods/ascension-protocol";
+            string modelBundlePath = "Bundles";
+            string bundleName = "models.bundle";
+            string prefabName = "pink_twin";
+            replacementService = new PlayerCharacterReplacementService(userProfilePath, modelBundlePath, bundleName, prefabName);
         }
 
         void Start()
         {
             Debug.Log("PlayerCharacterReplaceBehaviour Start called.");
             StartCoroutine(InitializeWhenPlayerReady());
-        }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.F1))
-            {
-                Debug.Log("F1 key pressed.");
-            }
         }
 
         private IEnumerator InitializeWhenPlayerReady()
