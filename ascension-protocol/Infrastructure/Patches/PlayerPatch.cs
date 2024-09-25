@@ -23,14 +23,14 @@ namespace Infrastructure.Patches
 
             Debug.Log("Custom Player Model Loaded");
 
-            // 既存のプレイヤーゲームオブジェクトにPlayerCharacterReplaceBehaviourコンポーネントを追加
+            // プレイヤーゲームオブジェクトを取得
             GameObject playerObject = __instance.gameObject;
+
+            // PlayerCharacterReplaceBehaviourコンポーネントを追加
             var playerCharacterReplace = playerObject.GetComponent<PlayerCharacterReplaceBehaviour>();
             if (playerCharacterReplace == null)
-
-
             {
-                playerCharacterReplace = playerObject.AddComponent<PlayerCharacterReplaceBehaviour>();
+                playerObject.AddComponent<PlayerCharacterReplaceBehaviour>();
             }
 
             Debug.Log("Custom Player Model Initialized");

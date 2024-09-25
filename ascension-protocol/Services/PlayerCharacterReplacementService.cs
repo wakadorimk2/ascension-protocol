@@ -85,9 +85,6 @@ namespace Domain.Services
                 Debug.LogError("VRoidモデルのインスタンス化に失敗しました。");
                 yield break;
             }
-
-            // アニメーションの設定
-            SetupPlayerAnimations(newPlayerModel, player);
         }
 
         private static void HideOriginalPlayerModel(EntityPlayerLocal player)
@@ -132,42 +129,6 @@ namespace Domain.Services
 
             // ルートオブジェクトを返す
             return newPlayerModel;
-        }
-
-        private static void SetupPlayerAnimations(GameObject newPlayerModel, EntityPlayerLocal player)
-        {
-            // 元のプレイヤーのAnimatorを取得
-            Animator originalAnimator = player.GetComponent<Animator>() ?? player.GetComponentInChildren<Animator>();
-            if (originalAnimator == null)
-            {
-                Debug.LogError("Original Animator not found on the player.");
-                return;
-            }
-
-            // 新しいモデルのAnimatorを取得
-            Animator newAnimator = newPlayerModel.GetComponent<Animator>() ?? newPlayerModel.GetComponentInChildren<Animator>();
-            if (newAnimator == null)
-            {
-                Debug.LogError("Animator component not found on the new player model.");
-                return;
-            }
-
-            // 元の Animator Controller を直接適用
-            newAnimator.runtimeAnimatorController = originalAnimator.runtimeAnimatorController;
-            newAnimator.avatar = originalAnimator.avatar;
-
-            // 実際に存在するステート名を使用してアニメーションを再生
-            string desiredState = "idle"; // 実際のステート名に変更
-
-            if (newAnimator.HasState(0, Animator.StringToHash(desiredState)))
-            {
-                newAnimator.Play(desiredState, 0);
-                Debug.Log($"\"{desiredState}\" ステートを再生しました。");
-            }
-            else
-            {
-                Debug.LogError($"\"{desiredState}\" ステートがAnimator Controllerに存在しません。");
-            }
         }
     }
 }

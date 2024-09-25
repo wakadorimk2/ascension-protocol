@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System;
 public class PlayerAnimationController : MonoBehaviour
 {
     private Animator animator;
@@ -7,28 +7,32 @@ public class PlayerAnimationController : MonoBehaviour
 
     void Start()
     {
-        // AnimatorƒRƒ“ƒ|[ƒlƒ“ƒg‚ğæ“¾
-        animator = GetComponent<Animator>();
+        // Animatorã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’å–å¾—
+        animator = GetComponentInChildren<Animator>();
+
+        // check if animator is null
         if (animator == null)
         {
-            Debug.LogError("AnimatorƒRƒ“ƒ|[ƒlƒ“ƒg‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñI");
+            Debug.LogError("Animatorã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ï¼");
+            throw new Exception("Animatorã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ï¼");
+        }
+        else
+        {
+            Debug.Log("Animatorã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’å–å¾—ã—ã¾ã—ãŸã€‚");
         }
     }
 
     void Update()
     {
-        // ƒL[ƒ{[ƒh“ü—Í‚ğæ“¾
-        float moveHorizontal = Input.GetAxis("Horizontal"); // A/D ‚Ü‚½‚Í ©/¨ƒL[
-        float moveVertical = Input.GetAxis("Vertical");     // W/S ‚Ü‚½‚Í ª/«ƒL[
+        // ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰å…¥åŠ›ã‚’å–å¾—
+        float moveHorizontal = Input.GetAxis("Horizontal"); // A/D ã¾ãŸã¯ â†/â†’ã‚­ãƒ¼
+        float moveVertical = Input.GetAxis("Vertical");     // W/S ã¾ãŸã¯ â†‘/â†“ã‚­ãƒ¼
 
-        // ˆÚ“®‘¬“x‚ğŒvZ
+        // ç§»å‹•é€Ÿåº¦ã‚’è¨ˆç®—
         speed = Mathf.Clamp01(Mathf.Abs(moveHorizontal) + Mathf.Abs(moveVertical));
 
-        // Animator‚Ìƒpƒ‰ƒ[ƒ^‚ğXV
+        // Animatorã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’æ›´æ–°
         animator.SetFloat("Speed", speed);
         animator.SetBool("isWalking", speed > 0.1f);
-
-        // ƒfƒoƒbƒO—pƒƒO
-        Debug.Log($"moveHorizontal: {moveHorizontal}, moveVertical: {moveVertical}, speed: {speed}, isWalking: {speed > 0.1f}");
     }
 }
