@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<xml>
-    <Name value="ascension-protocol" />  <!-- MODの名前 -->
-    <DisplayName value="Ascension Protocol" />  <!-- MODの名前 -->
-    <Version value="1.0" />  <!-- MODのバージョン -->
-    <Description value="Replaces the default player character with a custom VRoid model." />  <!-- MODの説明 -->
-    <Author value="wakadori" />  <!-- 作成者の名前 -->
-    <Website value="" />  <!-- Webサイトのリンクがあればここに -->
-</xml>
