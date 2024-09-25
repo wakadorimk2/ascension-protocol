@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 3686008664
+CRC: 2585255188
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: c9f2645cfdd93a15821363b0ea253bc5
+    Hash: 2349e38f395ccf432e7259997bd1a7b1
   TypeTreeHash:
     serializedVersion: 2
-    Hash: c645a9ac059f327171650a450703d64c
+    Hash: f6718c3d2064345c152313fc958ebad8
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: c9f2645cfdd93a15821363b0ea253bc5
+    Hash: 2349e38f395ccf432e7259997bd1a7b1
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -28,43 +28,9 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 95
   Script: {instanceID: 0}
-- Class: 114
-  Script: {fileID: 11500000, guid: 8c8b2024ae0d0944eb878d90212bf21b, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 177ea458e237fee41b0902e3006c744b, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 88684271e27adb843b6570957c9e7637, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 0a942e03b39600e41a1b161e958048f7, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 35bfb658269b2af478e501de243deda6, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 97a39af5b64ede64e86b92b5bf94a0e7, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: bfba4ccd3f854e64f868ce83553071a9, type: 3}
-- Class: 115
-  Script: {instanceID: 0}
 - Class: 137
   Script: {instanceID: 0}
-SerializeReferenceClassIdentifiers:
-- AssemblyName: VRM10
-  ClassName: UniVRM10.CurveMapper
-- AssemblyName: VRM10
-  ClassName: UniVRM10.MorphTargetBinding
-- AssemblyName: VRM10
-  ClassName: UniVRM10.RendererFirstPersonFlags
-- AssemblyName: VRM10
-  ClassName: UniVRM10.VRM10ObjectExpression
-- AssemblyName: VRM10
-  ClassName: UniVRM10.VRM10ObjectFirstPerson
-- AssemblyName: VRM10
-  ClassName: UniVRM10.VRM10ObjectLookAt
-- AssemblyName: VRM10
-  ClassName: UniVRM10.VRM10ObjectMeta
-- AssemblyName: VRM10
-  ClassName: UniVRM10.Vrm10InstanceSpringBone
-- AssemblyName: VRM10
-  ClassName: UniVRM10.Vrm10InstanceSpringBone/Spring
+SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/pink_twin.prefab
 Dependencies: []
