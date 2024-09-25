@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 2585255188
+CRC: 1841016602
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 2349e38f395ccf432e7259997bd1a7b1
+    Hash: ef957e437a7a7525df1a933bcb408c22
   TypeTreeHash:
     serializedVersion: 2
-    Hash: f6718c3d2064345c152313fc958ebad8
+    Hash: fde6811ecc759911b6d3426a16e53445
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 2349e38f395ccf432e7259997bd1a7b1
+    Hash: ef957e437a7a7525df1a933bcb408c22
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -18,19 +18,16 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 21
   Script: {instanceID: 0}
-- Class: 28
-  Script: {instanceID: 0}
 - Class: 43
   Script: {instanceID: 0}
 - Class: 48
   Script: {instanceID: 0}
-- Class: 90
-  Script: {instanceID: 0}
-- Class: 95
+- Class: 74
   Script: {instanceID: 0}
 - Class: 137
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
-- Assets/pink_twin.prefab
+- Assets/Motions/Walking.fbx
+- Assets/Motions/Idle.fbx
 Dependencies: []
