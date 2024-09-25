@@ -25,7 +25,7 @@ Copy-Item "$fbxSourcePath\*.bundle" -Destination "$modsOutputPath\$modFolderName
 
 # ModInfo.xmlとその他のXMLファイルをコピー
 Write-Host "XMLファイルをコピー中..."
-Copy-Item "$projectRoot\ModInfo.xml" -Destination "$modsOutputPath\$modFolderName" -Force
+Copy-Item "$projectRoot\Mods\ModInfo.xml" -Destination "$modsOutputPath\$modFolderName" -Force
 
 # Configフォルダ内のファイルをコピー
 Write-Host "Configフォルダ内のファイルをコピー中..."
@@ -33,7 +33,7 @@ if (-Not (Test-Path "$modsOutputPath\$modFolderName\Config")) {
     Write-Host "Configフォルダが存在しません。作成します: $modsOutputPath\$modFolderName\Config"
     New-Item -Path "$modsOutputPath\$modFolderName\Config" -ItemType Directory
 }
-Copy-Item "$projectRoot\Config\*.xml" -Destination "$modsOutputPath\$modFolderName\Config" -Force
+Copy-Item "$projectRoot\Mods\Config\*.xml" -Destination "$modsOutputPath\$modFolderName\Config" -Force
 
 # 完了メッセージ
 Write-Host "コピーが完了しました。Modsフォルダに必要なファイルが揃いました。"

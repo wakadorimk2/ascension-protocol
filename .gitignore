@@ -128,3 +128,4 @@ Packages/*
 *.unityproj
 *.pidb.meta
 *.pidb
+Assets/AssetBundles/AssetBundles*
