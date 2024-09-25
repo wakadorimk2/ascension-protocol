@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+    <append xpath="/entity_classes">
+        <!-- 新しいプレイヤーキャラクターのエンティティ定義 -->
+        <entity_class name="customPlayerEntity" extends="playerFemale">
+            <property name="MeshFile" value="pink_twin.bundle" />
+            <property name="MaterialFile" value="" />
+        </entity_class>
+    </append>
+</configs>
