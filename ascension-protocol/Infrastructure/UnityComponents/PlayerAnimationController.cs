@@ -26,7 +26,6 @@ public class PlayerAnimationController : MonoBehaviour
         // Animatorコンポーネントを取得
         animator = GetComponentInChildren<Animator>();
 
-        // check if animator is null
         if (animator == null)
         {
             Debug.LogError("Animatorコンポーネントが見つかりません！");
@@ -37,16 +36,24 @@ public class PlayerAnimationController : MonoBehaviour
             Debug.Log("Animatorコンポーネントを取得しました。");
         }
 
+        // Animator Controllerの確認
+        if (animator.runtimeAnimatorController == null)
+        {
+            Debug.LogError("Animator Controllerが設定されていません！");
+            throw new Exception("Animator Controllerが設定されていません！");
+        }
+        else
+        {
+            Debug.Log("Animator Controllerが設定されています。");
+        }
+
         lastPosition = transform.position;
         Debug.Log("PlayerAnimationController初期化完了");
     }
 
     void FixedUpdate()
     {
-        if (playerEntity == null || animator == null)
-        {
-            return;
-        }
+        if (playerEntity == null || animator == null) return;
 
         // 現在位置と前回位置の差分から速度を計算
         Vector3 displacement = transform.position - lastPosition;
@@ -69,25 +76,4 @@ public class PlayerAnimationController : MonoBehaviour
             lastLogTime = Time.time;
         }
     }
-}
-
-public class EntityPlayerLocalWrapper : IPlayerEntity
-{
-    private EntityPlayerLocal player;
-
-    public EntityPlayerLocalWrapper(EntityPlayerLocal player)
-    {
-        this.player = player;
-    }
-
-    public Vector3 GetPosition() => player.position;
-    public Vector3 GetVelocity() => player.motion;
-    // 他の必要なメソッドの実装
-}
-
-public interface IPlayerEntity
-{
-    Vector3 GetPosition();
-    Vector3 GetVelocity();
-    // 他の必要なメソッドやプロパティ
 }
