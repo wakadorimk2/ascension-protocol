@@ -11,12 +11,17 @@ public class PlayerAnimationControllerBehaviour : MonoBehaviour
 
     void Awake()
     {
+        Debug.Log("PlayerAnimationControllerBehaviour Awake called.");
+
         // EntityPlayerLocalコンポーネントを取得
         playerEntity = GetComponent<EntityPlayerLocal>();
         if (playerEntity == null)
         {
             throw new Exception("EntityPlayerLocalコンポーネントが見つかりません！");
         }
+
+        // EntityPlayerLocalコンポーネントの情報を表示
+        Debug.Log("EntityPlayerLocal: " + playerEntity.name);
 
         // Animatorコンポーネントを取得
         animator = GetComponentInChildren<Animator>();
@@ -26,11 +31,17 @@ public class PlayerAnimationControllerBehaviour : MonoBehaviour
             throw new Exception("Animatorコンポーネントが見つかりません！");
         }
 
+        // Animatorコンポーネントの情報を表示
+        Debug.Log("Animator: " + animator.name);
+
         // Animator Controllerの確認
         if (animator.runtimeAnimatorController == null)
         {
             throw new Exception("Animator Controllerが設定されていません！");
         }
+
+        // Animator Controllerの情報を表示
+        Debug.Log("Animator Controller: " + animator.runtimeAnimatorController.name);
 
         lastPosition = transform.position;
         Debug.Log("PlayerAnimationControllerが初期化されました。");

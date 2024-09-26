@@ -1,6 +1,6 @@
 using UnityEngine;
 using System;
-public class PlayerAnimationController : MonoBehaviour
+public class PlayerAnimationControllerBehaviour : MonoBehaviour
 {
     private Animator animator;
     private Vector3 lastPosition;

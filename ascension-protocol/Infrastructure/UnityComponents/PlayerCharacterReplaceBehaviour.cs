@@ -33,9 +33,20 @@ namespace Infrastructure.UnityComponents
                 }
                 else
                 {
-                    yield return null; // 次のフレームまで待機
+                    yield return null;
                 }
             }
+
+            // プレイヤーが完全にロードされたらPlayerAnimationControllerBehaviourコンポーネントを追加
+            GameObject playerObject = GameManager.Instance.World?.GetPrimaryPlayer().gameObject;
+            var playerAnimationController = playerObject.GetComponent<PlayerAnimationControllerBehaviour>();
+            if (playerAnimationController == null)
+            {
+                playerObject.AddComponent<PlayerAnimationControllerBehaviour>();
+            }
+
+            // プレイヤーのアニメーションを変更
+            playerObject.GetComponent<Animator>().runtimeAnimatorController = playerAnimationController.GetComponent<Animator>().runtimeAnimatorController;
         }
     }
 }

@@ -32,16 +32,6 @@ namespace Infrastructure.Patches
                 playerObject.AddComponent<PlayerCharacterReplaceBehaviour>();
             }
 
-            // Replaceが完了したらPlayerAnimationControllerBehaviourコンポーネントを追加
-            if (playerCharacterReplace != null)
-            {
-                var playerAnimationController = playerObject.GetComponent<PlayerAnimationControllerBehaviour>();
-                if (playerAnimationController == null)
-                {
-                    playerObject.AddComponent<PlayerAnimationControllerBehaviour>();
-                }
-            }
-
             Debug.Log("Custom Player Model Initialized");
         }
     }
