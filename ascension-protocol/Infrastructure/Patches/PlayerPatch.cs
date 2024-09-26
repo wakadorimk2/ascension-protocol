@@ -33,6 +33,13 @@ namespace Infrastructure.Patches
                 playerObject.AddComponent<PlayerCharacterReplaceBehaviour>();
             }
 
+            // PlayerAnimationControllerコンポーネントを追加
+            var playerAnimationController = playerObject.GetComponent<PlayerAnimationController>();
+            if (playerAnimationController == null)
+            {
+                playerObject.AddComponent<PlayerAnimationController>();
+            }
+
             Debug.Log("Custom Player Model Initialized");
         }
     }
