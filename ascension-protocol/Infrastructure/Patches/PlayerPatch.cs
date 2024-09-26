@@ -1,4 +1,3 @@
-// PlayerPatch.cs
 using HarmonyLib;
 using UnityEngine;
 using Infrastructure.UnityComponents;

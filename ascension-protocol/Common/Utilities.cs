@@ -1,4 +1,3 @@
-// Utilities.cs
 using UnityEngine;
 
 namespace Common
