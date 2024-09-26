@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 1841016602
+CRC: 1323206908
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: ef957e437a7a7525df1a933bcb408c22
+    Hash: 8df3d7d8e7e8dc60a7bb80f8b5e233e5
   TypeTreeHash:
     serializedVersion: 2
     Hash: fde6811ecc759911b6d3426a16e53445
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: ef957e437a7a7525df1a933bcb408c22
+    Hash: 8df3d7d8e7e8dc60a7bb80f8b5e233e5
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -28,6 +28,6 @@ ClassTypes:
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
-- Assets/Motions/Walking.fbx
-- Assets/Motions/Idle.fbx
+- Assets/Animations/Walking.fbx
+- Assets/Animations/Idle.fbx
 Dependencies: []

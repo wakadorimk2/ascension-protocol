@@ -33,8 +33,6 @@ namespace Domain.Services
             if (context == null)
                 throw new ArgumentNullException(nameof(context));
 
-            Debug.Log("Initializing PlayerCharacterReplacementService");
-
             if (player == null)
             {
                 Debug.LogError("Player is null.");

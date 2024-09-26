@@ -1,6 +1,6 @@
 using UnityEngine;
 using System;
-public class PlayerAnimationController : MonoBehaviour
+public class PlayerAnimationControllerBehaviour : MonoBehaviour
 {
     private Animator animator;
     private EntityPlayerLocal playerEntity;
@@ -9,18 +9,13 @@ public class PlayerAnimationController : MonoBehaviour
     private bool isWalking;
     private float lastLogTime;
 
-    void Start()
+    void Awake()
     {
         // EntityPlayerLocalコンポーネントを取得
         playerEntity = GetComponent<EntityPlayerLocal>();
         if (playerEntity == null)
         {
-            Debug.LogError("EntityPlayerLocalコンポーネントが見つかりません！");
             throw new Exception("EntityPlayerLocalコンポーネントが見つかりません！");
-        }
-        else
-        {
-            Debug.Log("EntityPlayerLocalコンポーネントを取得しました。");
         }
 
         // Animatorコンポーネントを取得
@@ -28,30 +23,20 @@ public class PlayerAnimationController : MonoBehaviour
 
         if (animator == null)
         {
-            Debug.LogError("Animatorコンポーネントが見つかりません！");
             throw new Exception("Animatorコンポーネントが見つかりません！");
-        }
-        else
-        {
-            Debug.Log("Animatorコンポーネントを取得しました。");
         }
 
         // Animator Controllerの確認
         if (animator.runtimeAnimatorController == null)
         {
-            Debug.LogError("Animator Controllerが設定されていません！");
             throw new Exception("Animator Controllerが設定されていません！");
-        }
-        else
-        {
-            Debug.Log("Animator Controllerが設定されています。");
         }
 
         lastPosition = transform.position;
-        Debug.Log("PlayerAnimationController初期化完了");
+        Debug.Log("PlayerAnimationControllerが初期化されました。");
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (playerEntity == null || animator == null) return;
 

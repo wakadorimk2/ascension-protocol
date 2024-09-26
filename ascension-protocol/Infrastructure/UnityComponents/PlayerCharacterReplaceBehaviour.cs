@@ -17,11 +17,6 @@ namespace Infrastructure.UnityComponents
             string bundleName = "models.bundle";
             string prefabName = "pink_twin";
             replacementService = new PlayerCharacterReplacementService(userProfilePath, modelBundlePath, bundleName, prefabName);
-        }
-
-        void Start()
-        {
-            Debug.Log("PlayerCharacterReplaceBehaviour Start called.");
             StartCoroutine(InitializeWhenPlayerReady());
         }
 
