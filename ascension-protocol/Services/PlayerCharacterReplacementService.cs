@@ -106,6 +106,9 @@ namespace Domain.Services
             // モデルのインスタンス化
             GameObject newPlayerModel = GameObject.Instantiate(vroidCharacterPrefab);
 
+            // VRoidのAnimatorを取得
+            var vroidAnimator = newPlayerModel.GetComponentInChildren<Animator>();
+
             if (newPlayerModel == null)
             {
                 Debug.LogError("Failed to instantiate VRoid model.");

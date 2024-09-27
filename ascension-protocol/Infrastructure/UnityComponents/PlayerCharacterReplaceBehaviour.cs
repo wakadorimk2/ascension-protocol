@@ -22,10 +22,14 @@ namespace Infrastructure.UnityComponents
 
         private IEnumerator InitializeWhenPlayerReady()
         {
+            Debug.Log("InitializeWhenPlayerReady called.");
+
+            EntityPlayerLocal player = null;
+
             // プレイヤーが完全にロードされるまで待機
             while (!isInitialized)
             {
-                EntityPlayerLocal player = GameManager.Instance.World?.GetPrimaryPlayer();
+                player = GameManager.Instance.World?.GetPrimaryPlayer();
                 if (player != null && player.IsAlive())
                 {
                     isInitialized = true;
@@ -37,16 +41,21 @@ namespace Infrastructure.UnityComponents
                 }
             }
 
-            // プレイヤーが完全にロードされたらPlayerAnimationControllerBehaviourコンポーネントを追加
-            GameObject playerObject = GameManager.Instance.World?.GetPrimaryPlayer().gameObject;
-            var playerAnimationController = playerObject.GetComponent<PlayerAnimationControllerBehaviour>();
+            // プレイヤーが完全にロードされたら処理を続行
+
+            // PlayerAnimationControllerBehaviourコンポーネントを追加
+            Debug.Log("Add PlayerAnimationControllerBehaviour to player.");
+            var playerAnimationController = player.gameObject.GetComponent<PlayerAnimationControllerBehaviour>();
             if (playerAnimationController == null)
             {
-                playerObject.AddComponent<PlayerAnimationControllerBehaviour>();
+                player.gameObject.AddComponent<PlayerAnimationControllerBehaviour>();
+            }
+            else
+            {
+                Debug.Log("PlayerAnimationControllerBehaviour already exists.");
             }
 
-            // プレイヤーのアニメーションを変更
-            playerObject.GetComponent<Animator>().runtimeAnimatorController = playerAnimationController.GetComponent<Animator>().runtimeAnimatorController;
+            Debug.Log("InitializeWhenPlayerReady finished.");
         }
     }
 }
