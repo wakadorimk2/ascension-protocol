@@ -1,0 +1,36 @@
+ManifestFileVersion: 0
+CRC: 1096037644
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 3e483e18e9c112c370d6cc76b40dfb91
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: fde6811ecc759911b6d3426a16e53445
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: 3e483e18e9c112c370d6cc76b40dfb91
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 137
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Animations/Walking.fbx
+- Assets/Animations/Jump.fbx
+- Assets/Animations/Idle.fbx
+- Assets/Animations/Punching.fbx
+- Assets/Animations/Slow Run.fbx
+Dependencies: []
